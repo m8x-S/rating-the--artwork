@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artwork Rating</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#f8d7ff,#ffd6e7);
+    font-family:Arial,sans-serif;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    width:320px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.art{
+    font-size:80px;
+    margin-bottom:15px;
+}
+
+h2{
+    margin:10px 0;
+}
+
+.stars{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin:20px 0;
+}
+
+.star{
+    font-size:40px;
+    color:#ccc;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.star.active{
+    color:gold;
+    transform:scale(1.15);
+}
+
+#message{
+    margin-top:15px;
+    font-weight:bold;
+    color:#555;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+    <div class="art">🎨</div>
+    <h2>Rate This Artwork</h2>
+
+    <div class="stars">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+    </div>
+
+    <div id="message">Tap a star to rate</div>
+</div>
+
+<script>
+const stars = document.querySelectorAll('.star');
+const message = document.getElementById('message');
+
+stars.forEach(star => {
+    star.addEventListener('click', () => {
+        const rating = star.dataset.value;
+
+        stars.forEach(s => {
+            s.classList.remove('active');
+            if(s.dataset.value <= rating){
+                s.classList.add('active');
+            }
+        });
+
+        message.innerHTML = `You rated this artwork ⭐ ${rating}/5`;
+    });
+});
+</script>
+
+</body>
+</html>
