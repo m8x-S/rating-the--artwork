@@ -7,93 +7,144 @@
 
 <style>
 body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#f8d7ff,#ffd6e7);
-    font-family:Arial,sans-serif;
+margin:0;
+font-family:Poppins,sans-serif;
+background:linear-gradient(135deg,#ffd6e7,#ff9eb5);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
 }
 
 .card{
-    background:white;
-    padding:30px;
-    border-radius:20px;
-    width:320px;
-    text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+background:white;
+padding:30px;
+border-radius:20px;
+width:320px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
 }
 
 .art{
-    font-size:80px;
-    margin-bottom:15px;
-}
-
-h2{
-    margin:10px 0;
+font-size:80px;
 }
 
 .stars{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    margin:20px 0;
+display:flex;
+justify-content:center;
+gap:8px;
+margin:20px 0;
 }
 
 .star{
-    font-size:40px;
-    color:#ccc;
-    cursor:pointer;
-    transition:0.2s;
+font-size:40px;
+cursor:pointer;
+color:#ccc;
+transition:.2s;
 }
 
 .star.active{
-    color:gold;
-    transform:scale(1.15);
+color:gold;
+transform:scale(1.15);
 }
 
 #message{
-    margin-top:15px;
-    font-weight:bold;
-    color:#555;
+margin-top:15px;
+font-weight:bold;
+}
+
+#thankPage{
+display:none;
+text-align:center;
+padding:20px;
+animation:fadeIn 1s;
+}
+
+h1{
+color:white;
+}
+
+.instagram{
+font-size:28px;
+margin-top:20px;
+}
+
+.instagram a{
+text-decoration:none;
+color:white;
+font-weight:bold;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 </style>
 </head>
 <body>
 
-<div class="card">
-    <div class="art">🎨</div>
-    <h2>Rate This Artwork</h2>
+<div class="card" id="ratingCard">
+<div class="art">🎨</div>
 
-    <div class="stars">
-        <span class="star" data-value="1">★</span>
-        <span class="star" data-value="2">★</span>
-        <span class="star" data-value="3">★</span>
-        <span class="star" data-value="4">★</span>
-        <span class="star" data-value="5">★</span>
-    </div>
+<h2>Rate This Artwork</h2>
 
-    <div id="message">Tap a star to rate</div>
+<div class="stars">
+<span class="star" data-value="1">★</span>
+<span class="star" data-value="2">★</span>
+<span class="star" data-value="3">★</span>
+<span class="star" data-value="4">★</span>
+<span class="star" data-value="5">★</span>
+</div>
+
+<div id="message">Tap a star to rate</div>
+</div>
+
+<div id="thankPage">
+<h1>❤️ Thanks For Visiting Our Platform ❤️</h1>
+
+<div class="instagram">
+📷 <a href="https://instagram.com/why__neha_022" target="_blank">
+why__neha_022
+</a>
+</div>
 </div>
 
 <script>
-const stars = document.querySelectorAll('.star');
-const message = document.getElementById('message');
+const stars=document.querySelectorAll('.star');
+const msg=document.getElementById('message');
 
-stars.forEach(star => {
-    star.addEventListener('click', () => {
-        const rating = star.dataset.value;
+stars.forEach(star=>{
 
-        stars.forEach(s => {
-            s.classList.remove('active');
-            if(s.dataset.value <= rating){
-                s.classList.add('active');
-            }
-        });
+star.addEventListener('click',()=>{
 
-        message.innerHTML = `You rated this artwork ⭐ ${rating}/5`;
-    });
+const rating=star.dataset.value;
+
+stars.forEach(s=>{
+s.classList.remove('active');
+
+if(s.dataset.value<=rating){
+s.classList.add('active');
+}
+});
+
+msg.innerHTML="You rated this artwork ⭐ "+rating+"/5";
+
+setTimeout(()=>{
+
+document.getElementById('ratingCard').style.display='none';
+document.getElementById('thankPage').style.display='block';
+
+},1500);
+
+});
+
 });
 </script>
 
